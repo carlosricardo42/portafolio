@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Navbar from './Componentes/Navbar/Navbar';
 import SideDrawer from './Componentes/SideDrawer/SideDrawer';
 import Backdrop from './Componentes/Backdrop/Backdrop';
+import Home from './Componentes/Home/Home';
+import Work from './Componentes/Work/Work';
+import About from './Componentes/About/About';
+import Contact from './Componentes/Contact/Contact';
 
 class App extends Component {
   state = {
@@ -27,14 +32,21 @@ class App extends Component {
     }
 
     return (
+      <Router>
       <div style={{height: '100%'}}>
         <Navbar drawerToggleClickHandler={this.drawerToggleClickHandler} />
         <SideDrawer show={this.state.sideDrawerOpen}/>
         {backdrop}
         <main >
-          <p>This is the page content!</p>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/work' component={Work} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/contact' component={Contact} />
+      </Switch>
         </main>
-      </div>
+      </div> 
+      </Router>
     );
   }
 }
